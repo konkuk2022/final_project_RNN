@@ -36,8 +36,8 @@ def data_preprocessing(df,electra_model):
     return x_data, y_data
 
 
-electra_model_path= "/content/drive/MyDrive/final_project/model/kote_pytorch_lightning.bin"
-train_data_path = 'data/test.tsv'
+electra_model_path= "/home/final_project/saved_model/kote_pytorch_lightning.bin"
+train_data_path = '/home/data/train.tsv'
 
 df = pd.read_csv(train_data_path,delimiter='\t',names=['num','text','emotion'],header=None)
 
