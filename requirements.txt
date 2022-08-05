@@ -1,5 +1,6 @@
 transformers
-pytorch
+torch
 pytorch_lightning
+pandas
 kss
 gdown
