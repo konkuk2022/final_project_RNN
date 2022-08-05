@@ -8,4 +8,4 @@
 
 pip install -r requirements.txt
 
-python gdown https://drive.google.com/uc?id=1MIX3Fj9OmI1vNzaAiuGW7kGm0iSbZwcJ
+gdown https://drive.google.com/uc?id=1MIX3Fj9OmI1vNzaAiuGW7kGm0iSbZwcJ
