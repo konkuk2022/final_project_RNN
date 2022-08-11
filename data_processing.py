@@ -7,6 +7,10 @@ import kss
 
 import pandas as pd
 
+# huggingface/tokenizer 에러 발생 시 아래 코드 입력
+# import os
+# os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 def one_hot_encode(data, n_label=44):
     data = list(map(int,data.split(',')))
     one_hot = [0] * n_label
