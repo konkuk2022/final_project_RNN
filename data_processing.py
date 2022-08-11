@@ -21,19 +21,18 @@ def data_preprocessing(df,electra_model):
     pr_x = []
     for x in X:
         split_x = []
-        for sent in kss.split_sentences(x):
-            split_x.append(electra_model(sent)[0])
+        sp_x = kss.split_sentences(x)
+        for sent in sp_x:
+            split_x.append(electra_model(sent)[0].tolist())
         pr_x.append(split_x)
-    x_data = torch.tensor(torch.stack(pr_x))
 
     # label one hot encoding and to tensor
     Y = df['emotion'][:]
     pr_y = []
     for y in Y:
         pr_y.append(one_hot_encode(y))
-    y_data = torch.stack(pr_y,0)
     
-    return x_data, y_data
+    return pr_x, pr_y
 
 
 electra_model_path= "./saved_model/kote_pytorch_lightning.bin"
