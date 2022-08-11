@@ -111,7 +111,7 @@ electra_model_path= "./saved_model/kote_pytorch_lightning.bin"
 data_type = 'train' # train / test /  
 data_path = f'./data/{data_type}.tsv'
 
-df = pd.read_csv(train_data_path,delimiter='\t',names=['num','text','emotion'],header=None)
+df = pd.read_csv(data_path,delimiter='\t',names=['num','text','emotion'],header=None)
 
 trained_model = KOTEtagger()
 trained_model.load_state_dict(torch.load(electra_model_path))
