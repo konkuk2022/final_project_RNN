@@ -108,7 +108,7 @@ class KOTEtagger(pl.LightningModule):
         return output
     
 electra_model_path= "./saved_model/kote_pytorch_lightning.bin"
-data_type = 'train' # train / test /  
+data_type = 'train' # train / test / val
 data_path = f'./data/{data_type}.tsv'
 
 df = pd.read_csv(data_path,delimiter='\t',names=['num','text','emotion'],header=None)
