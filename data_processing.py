@@ -35,11 +35,6 @@ def data_preprocessing(df,electra_model):
     return pr_x, pr_y
 
 
-electra_model_path= "./saved_model/kote_pytorch_lightning.bin"
-train_data_path = './data/train.tsv'
-
-df = pd.read_csv(train_data_path,delimiter='\t',names=['num','text','emotion'],header=None)
-
 LABELS = ['불평/불만',
  '환영/호의',
  '감동/감탄',
@@ -111,8 +106,16 @@ class KOTEtagger(pl.LightningModule):
         torch.cuda.empty_cache()
         
         return output
+    
+electra_model_path= "./saved_model/kote_pytorch_lightning.bin"
+data_type = 'train' # train / test /  
+data_path = f'./data/{data_type}.tsv'
+
+df = pd.read_csv(train_data_path,delimiter='\t',names=['num','text','emotion'],header=None)
 
 trained_model = KOTEtagger()
 trained_model.load_state_dict(torch.load(electra_model_path))
 
 x_data,y_data = data_preprocessing(df,trained_model)
+data_xy = pd.DataFrame(list(zip(x,y)), columns = ['emotion','label'])
+data_xy.to_pickle(f"./data/{data_type}_data.pkl")
