@@ -7,9 +7,8 @@ import kss
 
 import pandas as pd
 
-# huggingface/tokenizer 에러 발생 시 아래 코드 입력
-# import os
-# os.environ["TOKENIZERS_PARALLELISM"] = "false"
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def one_hot_encode(data, n_label=44):
     data = list(map(int,data.split(',')))
@@ -90,7 +89,7 @@ class KOTEtagger(pl.LightningModule):
     def __init__(self):
         super().__init__()
         self.electra = ElectraModel.from_pretrained("beomi/KcELECTRA-base").to(device)
-        self.tokenizer = AutoTokenizer.from_pretrained("beomi/KcELECTRA-base")
+        self.tokenizer = AutoTokenizer.from_pretrained("beomi/KcELECTRA-base", TOKENIZERS_PARALLELISM=True)
         self.classifier = nn.Linear(self.electra.config.hidden_size, 44).to(device)
         
     def forward(self, text:str):
@@ -112,7 +111,7 @@ class KOTEtagger(pl.LightningModule):
         return output
     
 electra_model_path= "./saved_model/kote_pytorch_lightning.bin"
-data_type = 'train' # train / test / val
+data_type = 'train' # train / test /  
 data_path = f'./data/{data_type}.tsv'
 
 df = pd.read_csv(data_path,delimiter='\t',names=['num','text','emotion'],header=None)
@@ -121,5 +120,24 @@ trained_model = KOTEtagger()
 trained_model.load_state_dict(torch.load(electra_model_path))
 
 x_data,y_data = data_preprocessing(df,trained_model)
-data_xy = pd.DataFrame(list(zip(x,y)), columns = ['emotion','label'])
+data_xy = pd.DataFrame(list(zip(x_data,y_data)), columns = ['emotion','label'])
 data_xy.to_pickle(f"./data/{data_type}_data.pkl")
+
+
+data_type = 'test' # train / test / val 
+data_path = f'./data/{data_type}.tsv'
+
+df2 = pd.read_csv(data_path,delimiter='\t',names=['num','text','emotion'],header=None)
+
+x_data2,y_data2 = data_preprocessing(df2,trained_model)
+data_xy2 = pd.DataFrame(list(zip(x_data2,y_data2)), columns = ['emotion','label'])
+data_xy2.to_pickle(f"./data/{data_type}_data.pkl")
+
+data_type = 'val' # train / test /
+data_path = f'./data/{data_type}.tsv'
+
+df3 = pd.read_csv(data_path,delimiter='\t',names=['num','text','emotion'],header=None)
+
+x_data3,y_data3 = data_preprocessing(df3,trained_model)
+data_xy3 = pd.DataFrame(list(zip(x_data3,y_data3)), columns = ['emotion','label'])
+data_xy3.to_pickle(f"./data/{data_type}_data.pkl")
