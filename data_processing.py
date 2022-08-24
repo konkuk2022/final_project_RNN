@@ -105,7 +105,7 @@ class KOTEtagger(pl.LightningModule):
         output = self.electra(encoding["input_ids"], attention_mask=encoding["attention_mask"])
         output = output.last_hidden_state[:,0,:]
         output = self.classifier(output)
-        output = torch.sigmoid(output)
+        # output = torch.sigmoid(output)
         torch.cuda.empty_cache()
         
         return output
