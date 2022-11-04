@@ -34,7 +34,7 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained('beomi/KcELECTRA-base', do_lower_case=False)
     
     # 모델 pth 위치
-    MODEl_PATH = './model/best_model_52.pth' 
+    MODEl_PATH = './model/best_model.pth' 
     
     model = ELECTRALSTMClassification()
     model.load_state_dict(torch.load(MODEl_PATH)['model_state_dict'],strict=False)
@@ -84,9 +84,8 @@ if __name__ == "__main__":
     movie_data = pd.read_pickle(movie_path)
     
     
-    # 영화와 감정 cosine 유사도 검색
-    result = {} # dictionary로 저장 후, index로 movie data에 접근
-    for i, movie in movie_data.iterrows()::
-      result['cosine'] = cos_similiarity(np.array(movie['pb_emotion']),np.array(diary['pb_emotion'].detach().cpu())))
-      result['index'] = i
+    # 영화와 감정 cosine 유사도 계산
+    movie_data['cos_sim'] = movie_data['pb_emotion'].map(lambda x: cos_similiarity(np.array(x), np.array(diary['pb_emotion'].detach().cpu())))
     
+    movie_data.sort_value(by='cos_sim', ascending=False)
+    print(movie_data.head)
