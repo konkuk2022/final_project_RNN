@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # movie 데이터 
     # [제목, 줄거리, 0.4이상 감정, 감정 확률벡터]
     # []
-    movie_path = './data/movie/영화_52_data.pkl'
+    movie_path = './data/movie/movie_data_new_data_kr.pkl'
 
     movie_data = pd.read_pickle(movie_path)
     
@@ -87,12 +87,12 @@ if __name__ == "__main__":
     # 영화와 감정 cosine 유사도 계산
     movie_data['cos_sim'] = movie_data['pb_emotion'].map(lambda x: cos_similiarity(np.array(x), np.array(diary['pb_emotion'].detach().cpu())))
     
-    movie_data.sort_value(by='cos_sim', ascending=False)
+    
     
     # 결과 출력(일기, 감정, 영화 추천, 영화 감정)
     print(diary['text'])
     for l, p in zip(LABELS, diary['pb_emotion'].tolist()):
         if p>= 0.4:
-            print(f"{l}, {p}")
+            print(f"{l}: {p}")
     
     print(movie_data.sort_values(by='cos_sim', ascending=False).head(5))
