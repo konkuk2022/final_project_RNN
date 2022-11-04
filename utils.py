@@ -21,3 +21,12 @@ def kss_sentence(sent):
         else:
             x += ' [SEP] ' + s
     return x
+
+
+# 감정 출력을 위한 one hot encoding
+def one_hot_encoder(dataset, n_labels=44):
+    one_hot = [0] * n_labels
+    label_idx = dataset
+    for idx in label_idx:
+        one_hot[int(idx)] = 1
+    return torch.LongTensor(one_hot)
