@@ -88,4 +88,11 @@ if __name__ == "__main__":
     movie_data['cos_sim'] = movie_data['pb_emotion'].map(lambda x: cos_similiarity(np.array(x), np.array(diary['pb_emotion'].detach().cpu())))
     
     movie_data.sort_value(by='cos_sim', ascending=False)
+    
+    # 결과 출력(일기, 감정, 영화 추천, 영화 감정)
+    print(diary['text'])
+    for l, p in zip(LABELS, diary['pb_emotion'].tolist()):
+        if p>= 0.4:
+            print(f"{l}, {p}")
+    
     print(movie_data.head)
