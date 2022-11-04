@@ -13,14 +13,17 @@ def cos_similiarity(v1, v2):
 
 
 # 여러 문장을 나눠서 sep 토큰을 대입
-def kss_sentence(sent):
+def kss_sentence(sent,max_length=512):
     x = ''
     split_sent = kss.split_sentences(sent)
     for i,s in enumerate(split_sent):
         if i == 0:
             x = s
         else:
-            x += ' [SEP] ' + s
+            if len(x + ' [SEP] ' + s)<= max_length:
+                x += ' [SEP] ' + s
+            else:
+                break
     return x
 
 
