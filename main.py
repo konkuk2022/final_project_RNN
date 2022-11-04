@@ -63,7 +63,7 @@ if __name__ == "__main__":
     diary_pred,_,_ = model(input_id, mask, sep_idx)
     
     # 확률 값으로 변환하기 위한 sigmoid
-    diary['pb_emotion'] = torch.sigmoid(dic_pred[0])
+    diary['pb_emotion'] = torch.sigmoid(diary_pred[0])
     diary['emotion'] = one_hot_encoder(diary['pb_emotion'])
     
     LABELS = ['불평/불만', '환영/호의', '감동/감탄', '지긋지긋', '고마움',
