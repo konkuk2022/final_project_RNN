@@ -1,4 +1,5 @@
 import kss
+import numpy as np
 
 # cosine similarity
 def cos_similiarity(v1, v2):
