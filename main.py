@@ -95,4 +95,4 @@ if __name__ == "__main__":
         if p>= 0.4:
             print(f"{l}, {p}")
     
-    print(movie_data.head)
+    print(movie_data.sort_values(by='cos_sim', ascending=False).head(5))
