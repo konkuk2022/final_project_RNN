@@ -36,7 +36,7 @@ if __name__ == "__main__":
     # 모델 pth 위치
     MODEl_PATH = './model/best_model.pth' 
     
-    model = ELECTRALSTMClassification()
+    model = ELECTRALSTMClassification(config)
     model.load_state_dict(torch.load(MODEl_PATH)['model_state_dict'],strict=False)
     model.to(device)
     
