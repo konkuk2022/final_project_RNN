@@ -44,7 +44,7 @@ if __name__ == "__main__":
     
     
     # 문장 입력 -> SEP 토큰대입 -> token화
-    diary['text'] = "여기에 문장을 받아와야한다."
+    diary['text'] = input('일기 : ')
     # diary['sep_text'] = kss_sentence(diary['text'])
     diary_embedding = tokenizer(kss_sentence(diary['text']), 
                          truncation=True, 
