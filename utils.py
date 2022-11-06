@@ -21,11 +21,7 @@ def kss_sentence(sent,max_length=512):
         if i == 0:
             x = s
         else:
-            if len(x + ' [SEP] ' + s) <= max_length:
-                x += ' [SEP] ' + s
-            else:
-                print('글자수 제한 \n 잘린 일기: '+ x.replace("[SEP]", ""))
-                break
+            x += ' [SEP] ' + s
     return x
 
 
