@@ -77,8 +77,8 @@ if __name__ == "__main__":
               '행복', '불안/걱정', '기쁨', '안심/신뢰']
     
     # movie 데이터 
-    # [제목, 줄거리, 0.4이상 감정, 감정 확률벡터]
-    # []
+    # [제목, 줄거리, 0.3 이상 감정, 감정 확률벡터, 영화포스터url(null = ''), 관객 평점]
+    # ['제명','줄거리','emotion',   'pb_emtion',      'image_src',     'netizen_score']
     movie_path = './data/movie/movie_data_new_data_kr.pkl'
 
     movie_data = pd.read_pickle(movie_path)
