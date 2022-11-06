@@ -92,7 +92,7 @@ if __name__ == "__main__":
     # 결과 출력(일기, 감정, 영화 추천, 영화 감정)
     print(diary['text'])
     for l, p in zip(LABELS, diary['pb_emotion'].tolist()):
-        if p>= 0.4:
+        if p>= 0.3:
             print(f"{l}: {p}")
     
     print(movie_data.sort_values(by='cos_sim', ascending=False).head(5))
