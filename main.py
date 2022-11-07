@@ -79,8 +79,8 @@ if __name__ == "__main__":
               '행복', '불안/걱정', '기쁨', '안심/신뢰']
     
     # movie 데이터 
-    # [제목, 줄거리, 0.3 이상 감정, 감정 확률벡터, 영화포스터url(null = ''), 관객 평점]
-    # ['제명','줄거리','emotion',   'pb_emtion',      'image_src',     'netizen_score']
+    # ['영화 제목', '영화 장르', '영화 배우', '영화 줄거리', '영화 포스터', '국가', '연령제한', '영화 개봉일' ,'영화 유사도', '영화 감정']
+    # ['title',       'genre',     'actor',     'text',       'poster',    'country','age_limit', 'opening_date' ,'cos_sim',   'emotion']
     movie_path = './data/movie/movie_data_new_data_kr.pkl'
 
     movie_data = pd.read_pickle(movie_path)
@@ -98,7 +98,4 @@ if __name__ == "__main__":
             print(f"{l}: {p}")
     
     print(movie_data.sort_values(by='cos_sim', ascending=False).head(5))
-
-    # ['일기 감정']
-    # ['영화 제목', '영화 장르', '영화 배우', '영화 줄거리', '영화 평점', '영화 포스터', '영화 유사도', '영화 유사도']
     
