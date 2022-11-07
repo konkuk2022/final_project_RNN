@@ -98,4 +98,6 @@ if __name__ == "__main__":
             print(f"{l}: {p}")
     
     print(movie_data.sort_values(by='cos_sim', ascending=False).head(5))
-    movie_data.sort_values(by='cos_sim', ascending=False).head(5).to_json('./movie_index.json', orient = 'index')
+    
+    movie_data.sort_values(by='cos_sim', ascending=False).head(5).to_json('./movie_index.json', orient = 'index',force_ascii=False)
+    pd.DataFrame.from_dict(diary['pb_emotion']).to_json('./diary.json')
