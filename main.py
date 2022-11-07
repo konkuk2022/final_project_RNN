@@ -98,4 +98,4 @@ if __name__ == "__main__":
             print(f"{l}: {p}")
     
     print(movie_data.sort_values(by='cos_sim', ascending=False).head(5))
-    
+    movie_data.sort_values(by='cos_sim', ascending=False).head(5).to_json('./movie_index.json', orient = 'index')
