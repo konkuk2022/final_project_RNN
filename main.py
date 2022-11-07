@@ -60,7 +60,9 @@ if __name__ == "__main__":
     mask = torch.LongTensor(diary_embedding['attention_mask']).unsqueeze(0).to('cuda')
     sep_idx = torch.where(input_id == 3)
     
-    diary_pred,_,_ = model(input_id, mask, sep_idx)
+    model.eval()
+    with torch.no_grad():
+        diary_pred,_,_ = model(input_id, mask, sep_idx)
     
     # 확률 값으로 변환하기 위한 sigmoid
     diary['pb_emotion'] = torch.sigmoid(diary_pred[0])
