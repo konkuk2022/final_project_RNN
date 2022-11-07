@@ -96,3 +96,7 @@ if __name__ == "__main__":
             print(f"{l}: {p}")
     
     print(movie_data.sort_values(by='cos_sim', ascending=False).head(5))
+
+    # ['일기 감정']
+    # ['영화 제목', '영화 장르', '영화 배우', '영화 줄거리', '영화 평점', '영화 포스터', '영화 유사도', '영화 유사도']
+    
