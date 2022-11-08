@@ -84,9 +84,9 @@ if __name__ == "__main__":
     # 확률 값으로 변환하기 위한 sigmoid
     pb_emotion = torch.sigmoid(diary_pred[0]).detach().cpu().numpy()
     # threshold 기준으로 감정 선택된 인덱스만 가져오기
-    emotion_idx = np.argwhere(diary["pb_emotion"] > config.threshold)
+    emotion_idx = np.argwhere(pb_emotion > config.threshold)
     # 감정 벡터
-    diary["pb_emotion_selected"] = diary["pb_emotion"][emotion_idx].reshape(-1,).tolist()
+    diary["pb_emotion_selected"] = pb_emotion[emotion_idx].reshape(-1,).tolist()
     # 라벨
     diary["labels_selected"] = LABELS[emotion_idx].reshape(-1,).tolist()
     
