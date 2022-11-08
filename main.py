@@ -107,5 +107,5 @@ if __name__ == "__main__":
     
     movie_data.sort_values(by='cos_sim', ascending=False).head(5).to_json('./movie_index.json', orient = 'index',force_ascii=False)
     
-    with open("./diary.json", "w") as f:
-        json.dump(diary, f)
+    with open("./diary.json", "w", encoding="utf-8) as f:
+        json.dump(diary, f, force_ascii=False)
